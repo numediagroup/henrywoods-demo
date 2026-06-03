@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Book your skip — Henry Woods Skip Hire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/main.css">
+<style>
+/* ====== BOOKING FLOW — page-scoped additions on top of main.css ====== */
+body{background:var(--paper)}
+.book-shell{min-height:calc(100vh - 200px);padding:48px 0 96px}
+@media(max-width:640px){.book-shell{padding:28px 0 64px}}
+
+/* Progress rail */
+.progress{max-width:760px;margin:0 auto 48px;padding:0 28px}
+.progress__bar{position:relative;height:4px;background:var(--hairline);border-radius:var(--r-pill);overflow:hidden}
+.progress__fill{position:absolute;left:0;top:0;bottom:0;background:var(--hw-red);border-radius:var(--r-pill);transition:width 360ms var(--ease-out)}
+.progress__steps{display:flex;justify-content:space-between;margin-top:18px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.progress__step{transition:color 240ms ease;position:relative}
+.progress__step.is-done{color:var(--hw-red)}
+.progress__step.is-current{color:var(--ink)}
+@media(max-width:640px){.progress__steps{font-size:9px;letter-spacing:.06em}}
+@media(max-width:480px){.progress__step:not(.is-current){display:none}}
+
+/* Step card */
+.step-card{max-width:760px;margin:0 auto;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);padding:48px;box-shadow:var(--shadow-card)}
+@media(max-width:640px){.step-card{padding:28px 20px;margin:0 16px}}
+.step-card__head{margin-bottom:32px}
+.step-card__eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--hw-orange);margin:0 0 12px}
+.step-card__title{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);margin:0 0 12px}
+.step-card__sub{font-size:17px;line-height:1.55;color:var(--ink-muted);margin:0;max-width:52ch}
+
+.step-card__body{margin-bottom:32px}
+
+/* Form fields */
+.field{display:block;margin-bottom:20px}
+.field label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px}
+.field-input{width:100%;height:56px;padding:0 18px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-xs);font:inherit;font-size:17px;color:var(--ink);transition:border-color 160ms ease,background 160ms ease}
+.field-input:focus{outline:none;border-color:var(--hw-red);background:var(--canvas)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+.field-help{font-size:13px;color:var(--ink-faint);margin-top:8px;line-height:1.5}
+
+/* Selectable option cards (skip size, drive vs road) */
+.opt-grid{display:grid;gap:14px}
+.opt-grid--2{grid-template-columns:1fr 1fr}
+.opt-grid--4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.opt-grid--4{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.opt-grid--2,.opt-grid--4{grid-template-columns:1fr}}
+.opt{position:relative;display:flex;flex-direction:column;gap:8px;padding:22px 18px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-sm);cursor:pointer;text-align:left;transition:all 200ms var(--ease-out)}
+.opt:hover{border-color:var(--hw-orange);background:var(--canvas)}
+.opt.is-selected{border-color:var(--hw-red);background:#FFF8F4;box-shadow:inset 0 0 0 2px var(--hw-red)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt__check{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;border:2px solid var(--hairline);background:var(--canvas);transition:all 200ms var(--ease-out)}
+.opt.is-selected .opt__check{border-color:var(--hw-red);background:var(--hw-red)}
+.opt.is-selected .opt__check::after{content:"";position:absolute;left:5px;top:2px;width:7px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.opt__name{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:26px;line-height:1;letter-spacing:-0.02em;color:var(--ink)}
+.opt__name em{font-style:normal;font-size:14px;color:var(--ink-muted);font-weight:600;margin-left:4px}
+.opt__meta{font-size:12px;color:var(--ink-muted);font-weight:500;letter-spacing:.02em}
+.opt__price{margin-top:auto;padding-top:14px;border-top:1px solid var(--hairline);font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:24px;color:var(--hw-red);letter-spacing:-0.02em}
+.opt__price em{font-style:normal;font-size:12px;color:var(--ink-muted);font-weight:600;margin-left:4px}
+
+/* Yes/no quick-cards (placement, access) */
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.yn .opt{padding:18px 18px;flex-direction:row;align-items:center;gap:14px}
+.yn .opt__name{font-size:18px}
+.yn .opt__meta{margin-top:2px}
+
+/* Two-card layout — placement (drive / road) */
+.placement-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.placement-grid{grid-template-columns:1fr}}
+.place{position:relative;display:flex;flex-direction:column;gap:10px;padding:28px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-md);cursor:pointer;text-align:left;transition:all 200ms var(--ease-out)}
+.place:hover{border-color:var(--hw-orange);background:var(--canvas)}
+.place.is-selected{border-color:var(--hw-red);background:#FFF8F4}
+.place__icon{width:56px;height:56px;border-radius:50%;background:var(--canvas);border:2px solid var(--hairline);display:grid;place-items:center;color:var(--hw-red);margin-bottom:8px;transition:all 200ms var(--ease-out)}
+.place.is-selected .place__icon{background:var(--hw-red);color:#fff;border-color:var(--hw-red)}
+.place__icon svg{width:28px;height:28px}
+.place__title{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:20px;color:var(--ink);margin:0;letter-spacing:-0.01em}
+.place__sub{font-size:14px;color:var(--ink-muted);margin:0;line-height:1.5}
+.place__price{margin-top:8px;padding-top:14px;border-top:1px solid var(--hairline);font-size:13px;color:var(--ink-muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.place__price strong{color:var(--hw-red);font-family:"Panton","Sora",sans-serif;font-weight:800;letter-spacing:-0.01em;font-size:16px}
+
+/* Access checklist */
+.checklist{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.check{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-xs);cursor:pointer;transition:border-color 160ms ease}
+.check:hover{border-color:var(--hw-orange)}
+.check__label{font-size:15px;color:var(--ink);font-weight:500;flex:1}
+.check__opts{display:flex;gap:8px}
+.check__btn{padding:6px 16px;background:var(--canvas);border:1.5px solid var(--hairline);border-radius:var(--r-pill);font-size:13px;font-weight:700;color:var(--ink-muted);cursor:pointer;transition:all 160ms ease}
+.check__btn:hover{border-color:var(--hw-red);color:var(--hw-red)}
+.check__btn.is-yes{background:var(--hw-red);border-color:var(--hw-red);color:#fff}
+.check__btn.is-no{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* Order summary (Review step) */
+.review{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media(max-width:880px){.review{grid-template-columns:1fr}}
+.review__summary{background:var(--paper);border-radius:var(--r-sm);padding:28px}
+.review__summary h3{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:18px;margin:0 0 18px;letter-spacing:-0.005em;text-transform:uppercase;font-size:12px;letter-spacing:.12em;color:var(--ink-muted)}
+.review__line{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid var(--hairline);font-size:14px}
+.review__line:last-of-type{border-bottom:0}
+.review__line dt{color:var(--ink-muted);font-weight:600}
+.review__line dd{color:var(--ink);font-weight:600;margin:0;text-align:right}
+.review__total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:18px;border-top:2px solid var(--ink)}
+.review__total dt{font-size:13px;font-weight:700;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase}
+.review__total dd{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:36px;color:var(--hw-red);letter-spacing:-0.02em;margin:0;line-height:1}
+
+/* Pay panel (Stripe-styled visual mock) */
+.pay{display:flex;flex-direction:column;gap:14px}
+.pay__head{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-muted);font-weight:600;margin-bottom:6px}
+.pay__head svg{flex-shrink:0;color:var(--hw-green)}
+.pay__methods{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay__method{padding:14px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-xs);font-size:13px;font-weight:700;color:var(--ink);text-align:center;cursor:pointer;transition:all 160ms ease;display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px}
+.pay__method:hover{border-color:var(--hw-red)}
+.pay__method.is-active{border-color:var(--hw-red);background:#FFF8F4}
+.pay__divider{display:flex;align-items:center;gap:10px;color:var(--ink-faint);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:4px 0}
+.pay__divider::before,.pay__divider::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.pay__card{padding:14px 18px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-xs);display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-faint);font-family:"Geist Mono",monospace}
+.pay__card svg{flex-shrink:0;color:var(--ink-muted)}
+.pay__row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay__row .pay__card{font-size:14px}
+.pay__cta{margin-top:12px}
+.pay__lock{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--ink-faint);margin-top:10px;font-weight:500}
+.pay__lock svg{flex-shrink:0}
+
+/* Step nav (back / continue) */
+.step-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:24px;border-top:1px solid var(--hairline);margin-top:8px}
+.step-nav .btn{min-width:160px}
+.step-nav__skip{font-size:13px;color:var(--ink-faint);text-decoration:underline;font-weight:500}
+.step-nav__skip:hover{color:var(--hw-red)}
+
+/* Confirmation step */
+.confirm{text-align:center;padding:20px 0 12px}
+.confirm__tick{width:96px;height:96px;border-radius:50%;background:var(--hw-green);color:#fff;display:grid;place-items:center;margin:0 auto 28px;animation:pop 480ms var(--ease-spring)}
+.confirm__tick svg{width:52px;height:52px}
+@keyframes pop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1);opacity:1}}
+.confirm__ref{display:inline-block;padding:8px 18px;background:var(--paper);border-radius:var(--r-pill);font-family:"Geist Mono",monospace;font-size:14px;font-weight:600;color:var(--ink);margin:14px 0 28px;letter-spacing:.05em}
+.confirm__next{text-align:left;background:var(--paper);border-radius:var(--r-md);padding:28px 32px;margin:32px 0}
+.confirm__next h4{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 18px}
+.confirm__next ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;counter-reset:next}
+.confirm__next li{padding-left:36px;position:relative;font-size:15px;line-height:1.5;color:var(--ink);counter-increment:next}
+.confirm__next li::before{content:counter(next);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--hw-red);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;font-family:"Panton","Sora",sans-serif}
+.confirm__next li strong{color:var(--hw-red);font-weight:700}
+
+/* Step visibility */
+[data-step]{display:none}
+[data-step].is-active{display:block;animation:fadeIn 320ms var(--ease-out)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Sticky sub-bar showing running total */
+.runtot{position:sticky;bottom:0;background:var(--canvas);border-top:1px solid var(--hairline);padding:14px 28px;display:none;align-items:center;justify-content:space-between;gap:14px;z-index:20;box-shadow:0 -8px 24px -12px rgba(44,44,44,.1)}
+.runtot.is-shown{display:flex}
+.runtot__price{display:flex;flex-direction:column;line-height:1.1}
+.runtot__price span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
+.runtot__price strong{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:24px;color:var(--hw-red);letter-spacing:-0.02em}
+</style>
+</head>
+<body>
+
+<!-- UTILITY (lighter, more focused) -->
+<div class="util">
+  <div class="container util__row">
+    <div class="util__left">
+      <span class="util__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:02033699540"><strong style="color:var(--ink)">0203 369 9540</strong></a> &nbsp; <span class="hide-mob">if you'd rather book by phone</span></span>
+    </div>
+    <div class="util__right">
+      <span class="util__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Mill Lane, Croydon CR0&nbsp;4AA</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV (simplified — booking is the focus) -->
+<nav class="nav">
+  <div class="container nav__row">
+    <a href="./mockup.html" class="brand" aria-label="Henry Woods Skip Hire home">
+      <img src="./assets/logo.png" alt="Henry Woods Skip Hire" width="260" height="73">
+    </a>
+    <div class="nav__cta">
+      <a href="tel:02033699540" class="btn btn--phone">0203 369 9540</a>
+      <a href="./mockup.html" class="btn btn--ghost btn--small">Cancel</a>
+    </div>
+  </div>
+</nav>
+
+<main class="book-shell">
+  <!-- Progress -->
+  <div class="progress">
+    <div class="progress__bar"><div class="progress__fill" id="progFill" style="width:14%"></div></div>
+    <div class="progress__steps" id="progSteps">
+      <span class="progress__step is-current" data-step-label="1">Postcode</span>
+      <span class="progress__step" data-step-label="2">Date</span>
+      <span class="progress__step" data-step-label="3">Skip size</span>
+      <span class="progress__step" data-step-label="4">Placement</span>
+      <span class="progress__step" data-step-label="5">Access</span>
+      <span class="progress__step" data-step-label="6">Your details</span>
+      <span class="progress__step" data-step-label="7">Pay</span>
+    </div>
+  </div>
+
+  <!-- STEP 1 — POSTCODE -->
+  <section data-step="1" class="is-active">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 1 of 7</p>
+        <h1 class="step-card__title">Where's the skip going?</h1>
+        <p class="step-card__sub">Pop in your delivery postcode. We deliver across Croydon, Sutton, Wimbledon, Mitcham and most south London postcodes.</p>
+      </header>
+      <div class="step-card__body">
+        <label class="field" for="bk-pc">
+          <label>Delivery postcode</label>
+          <input id="bk-pc" class="field-input mono" type="text" value="CR0 4AA" autocomplete="postal-code" placeholder="e.g. CR0 4AA">
+          <p class="field-help">We'll confirm coverage before you pay — and apply for the council permit on your behalf if it goes on the road.</p>
+        </label>
+      </div>
+      <div class="step-nav">
+        <span></span>
+        <button class="btn btn--primary" onclick="next()">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 — DATE -->
+  <section data-step="2">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 2 of 7</p>
+        <h1 class="step-card__title">When do you want it dropped?</h1>
+        <p class="step-card__sub">Order before 14:00 and we'll deliver tomorrow. Same-day available by phone, subject to lorry availability.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="opt-grid opt-grid--4">
+          <button class="opt is-selected" data-date="Tomorrow">
+            <span class="opt__check"></span>
+            <span class="opt__name" style="font-size:20px">Tomorrow</span>
+            <span class="opt__meta">Order by 14:00 today</span>
+          </button>
+          <button class="opt" data-date="Mon 8 Jun">
+            <span class="opt__check"></span>
+            <span class="opt__name" style="font-size:20px">Mon 8 Jun</span>
+            <span class="opt__meta">Earliest weekday</span>
+          </button>
+          <button class="opt" data-date="Wed 10 Jun">
+            <span class="opt__check"></span>
+            <span class="opt__name" style="font-size:20px">Wed 10 Jun</span>
+            <span class="opt__meta">Midweek</span>
+          </button>
+          <button class="opt" data-date="Fri 12 Jun">
+            <span class="opt__check"></span>
+            <span class="opt__name" style="font-size:20px">Fri 12 Jun</span>
+            <span class="opt__meta">End of week</span>
+          </button>
+        </div>
+        <p class="field-help">Need a date that's not shown? Phone the yard on 0203 369 9540.</p>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <button class="btn btn--primary" onclick="next()">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 — SKIP SIZE -->
+  <section data-step="3">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 3 of 7</p>
+        <h1 class="step-card__title">What size do you need?</h1>
+        <p class="step-card__sub">Not sure? The 6 yard is our most-booked size and clears most kitchen rip-outs and renovations.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="opt-grid opt-grid--4">
+          <button class="opt" data-size="4" data-price="240" data-name="4 yard">
+            <span class="opt__check"></span>
+            <span class="opt__name">4<em>yd</em></span>
+            <span class="opt__meta">30&ndash;40 bin bags</span>
+            <span class="opt__meta">Bathroom &middot; garage</span>
+            <span class="opt__price">£240<em>inc VAT</em></span>
+          </button>
+          <button class="opt is-selected" data-size="6" data-price="288" data-name="6 yard">
+            <span class="opt__check"></span>
+            <span class="opt__name">6<em>yd</em></span>
+            <span class="opt__meta">50&ndash;60 bin bags</span>
+            <span class="opt__meta">Kitchen &middot; renovation</span>
+            <span class="opt__price">£288<em>inc VAT</em></span>
+          </button>
+          <button class="opt" data-size="8" data-price="318" data-name="8 yard">
+            <span class="opt__check"></span>
+            <span class="opt__name">8<em>yd</em></span>
+            <span class="opt__meta">70&ndash;80 bin bags</span>
+            <span class="opt__meta">Trade favourite</span>
+            <span class="opt__price">£318<em>inc VAT</em></span>
+          </button>
+          <button class="opt" data-size="12" data-price="396" data-name="12 yard">
+            <span class="opt__check"></span>
+            <span class="opt__name">12<em>yd</em></span>
+            <span class="opt__meta">100&ndash;120 bin bags</span>
+            <span class="opt__meta">Clearances only</span>
+            <span class="opt__price">£396<em>inc VAT</em></span>
+          </button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <button class="btn btn--primary" onclick="next()">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4 — PLACEMENT -->
+  <section data-step="4">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 4 of 7</p>
+        <h1 class="step-card__title">Where will the skip go?</h1>
+        <p class="step-card__sub">If it's on the road or pavement, the council needs a permit — we apply for it on your behalf.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="placement-grid">
+          <button class="place is-selected" data-placement="drive" data-permit="0">
+            <div class="place__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+            </div>
+            <h3 class="place__title">On my driveway</h3>
+            <p class="place__sub">Private property &mdash; no permit needed. Most common.</p>
+            <div class="place__price"><strong>No extra cost</strong></div>
+          </button>
+          <button class="place" data-placement="road" data-permit="55">
+            <div class="place__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 9h6"/><path d="M9 14h6"/><path d="M12 18v3"/></svg>
+            </div>
+            <h3 class="place__title">On the road or pavement</h3>
+            <p class="place__sub">We sort the council permit and add it to your total.</p>
+            <div class="place__price">Council permit <strong>+£55</strong></div>
+          </button>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <button class="btn btn--primary" onclick="next()">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5 — ACCESS -->
+  <section data-step="5">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 5 of 7</p>
+        <h1 class="step-card__title">Quick access check.</h1>
+        <p class="step-card__sub">Three quick questions so the driver knows what to expect. None of these are deal-breakers — they just help us bring the right lorry.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="checklist">
+          <div class="check" data-q="trees">
+            <span class="check__label">Are there low overhanging trees on the route in?</span>
+            <div class="check__opts">
+              <button class="check__btn" data-ans="yes">Yes</button>
+              <button class="check__btn is-no" data-ans="no">No</button>
+            </div>
+          </div>
+          <div class="check" data-q="access">
+            <span class="check__label">Is the access narrower than 2.5&thinsp;m?</span>
+            <div class="check__opts">
+              <button class="check__btn" data-ans="yes">Yes</button>
+              <button class="check__btn is-no" data-ans="no">No</button>
+            </div>
+          </div>
+          <div class="check" data-q="surface">
+            <span class="check__label">Is the driveway tarmac, concrete or block paving?</span>
+            <div class="check__opts">
+              <button class="check__btn is-yes" data-ans="yes">Yes</button>
+              <button class="check__btn" data-ans="no">No</button>
+            </div>
+          </div>
+        </div>
+        <p class="field-help">If you're not sure about any of these, WhatsApp a photo to 0203 369 9540 and we'll have a look before we set off.</p>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <button class="btn btn--primary" onclick="next()">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6 — DETAILS -->
+  <section data-step="6">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 6 of 7</p>
+        <h1 class="step-card__title">Where do we send the receipt?</h1>
+        <p class="step-card__sub">We'll text you a 30-minute delivery window on the day. No marketing, no spam.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="field-row">
+          <label class="field" for="bk-name">
+            <label>Your name</label>
+            <input id="bk-name" class="field-input" type="text" value="Sarah Henderson" autocomplete="name">
+          </label>
+          <label class="field" for="bk-phone">
+            <label>Mobile number</label>
+            <input id="bk-phone" class="field-input mono" type="tel" value="07700 900 123" autocomplete="tel">
+          </label>
+        </div>
+        <label class="field" for="bk-email">
+          <label>Email</label>
+          <input id="bk-email" class="field-input" type="email" value="sarah@example.co.uk" autocomplete="email">
+        </label>
+        <label class="field" for="bk-addr">
+          <label>Delivery address</label>
+          <input id="bk-addr" class="field-input" type="text" value="42 Sanderstead Road, Selsdon" autocomplete="street-address">
+        </label>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <button class="btn btn--primary" onclick="next()">Review &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 7 — REVIEW + PAY -->
+  <section data-step="7">
+    <div class="step-card">
+      <header class="step-card__head">
+        <p class="step-card__eyebrow">Step 7 of 7</p>
+        <h1 class="step-card__title">Quick check, then pay.</h1>
+        <p class="step-card__sub">Card, Apple Pay or Google Pay. No surcharges. You get a receipt and a delivery window straight after.</p>
+      </header>
+      <div class="step-card__body">
+        <div class="review">
+          <div class="review__summary">
+            <h3>Your order</h3>
+            <dl>
+              <div class="review__line"><dt>Skip size</dt><dd id="r-size">6 yard</dd></div>
+              <div class="review__line"><dt>Delivery to</dt><dd id="r-addr">42 Sanderstead Road, Selsdon CR2</dd></div>
+              <div class="review__line"><dt>Drop-off</dt><dd id="r-date">Tomorrow</dd></div>
+              <div class="review__line"><dt>Hire period</dt><dd>14 days</dd></div>
+              <div class="review__line"><dt>Placement</dt><dd id="r-place">On my driveway</dd></div>
+              <div class="review__line" id="r-permitLine" style="display:none"><dt>Council permit</dt><dd>+£55</dd></div>
+              <div class="review__line"><dt>VAT inc.</dt><dd>Yes</dd></div>
+              <div class="review__total"><dt>Total</dt><dd id="r-total">£288</dd></div>
+            </dl>
+          </div>
+          <div class="pay">
+            <div class="pay__head">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure payment via Stripe
+            </div>
+            <div class="pay__methods">
+              <button class="pay__method"><svg width="32" height="14" viewBox="0 0 32 14" fill="currentColor"><text x="0" y="11" font-family="-apple-system,sans-serif" font-size="11" font-weight="600">&#63743;Pay</text></svg></button>
+              <button class="pay__method"><span style="font-weight:700;color:#4285F4">G</span><span style="font-weight:600">Pay</span></button>
+            </div>
+            <div class="pay__divider">Or pay by card</div>
+            <div class="pay__card">
+              <svg width="22" height="14" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="22" height="14" rx="2"/><line x1="1" y1="5" x2="23" y2="5"/></svg>
+              <span>1234 1234 1234 1234</span>
+            </div>
+            <div class="pay__row">
+              <div class="pay__card"><span>MM / YY</span></div>
+              <div class="pay__card"><span>CVC</span></div>
+            </div>
+            <button class="btn btn--primary pay__cta" onclick="next()">Pay <span id="r-payAmount">£288</span> securely</button>
+            <div class="pay__lock">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              SSL encrypted &middot; Stripe-secured &middot; PCI-DSS
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn--ghost" onclick="prev()">&larr; Back</button>
+        <span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIRMATION -->
+  <section data-step="8">
+    <div class="step-card">
+      <div class="confirm">
+        <div class="confirm__tick">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="step-card__eyebrow" style="color:var(--hw-green)">Booking confirmed</p>
+        <h1 class="step-card__title">You're all booked, <span id="c-name">Sarah</span>.</h1>
+        <p class="step-card__sub" style="margin:14px auto 0;text-align:left;max-width:46ch">Your <span id="c-size">6 yard</span> skip is on the schedule for <span id="c-date">tomorrow</span>. A receipt is on its way to <span id="c-email">sarah@example.co.uk</span>.</p>
+        <div class="confirm__ref">Booking ref: <strong id="c-ref">HW-2026-04812</strong></div>
+        <div class="confirm__next">
+          <h4>What happens next</h4>
+          <ol>
+            <li>Receipt in your inbox in the next <strong>5 minutes</strong>.</li>
+            <li>The driver texts you a <strong>30-minute delivery window</strong> on the morning of drop-off.</li>
+            <li>14-day hire starts when the skip lands. <strong>WhatsApp 0203 369 9540</strong> any time you want it collected.</li>
+            <li>We hand-sort what comes back. <strong>95%</strong> stays out of landfill.</li>
+          </ol>
+        </div>
+        <div class="step-nav" style="border-top:0;justify-content:center;gap:12px">
+          <a href="./mockup.html" class="btn btn--ghost">Back to Henry Woods</a>
+          <a href="tel:02033699540" class="btn btn--primary">Call the yard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+// ============== BOOKING FLOW STATE MACHINE ==============
+const state = {
+  step: 1,
+  postcode: 'CR0 4AA',
+  date: 'Tomorrow',
+  size: { name: '6 yard', price: 288, code: 6 },
+  placement: { name: 'On my driveway', permit: 0 },
+  access: { trees: 'no', access: 'no', surface: 'yes' },
+  details: { name: 'Sarah Henderson', phone: '07700 900 123', email: 'sarah@example.co.uk', address: '42 Sanderstead Road, Selsdon' },
+};
+const TOTAL_STEPS = 7;
+
+function showStep(n){
+  document.querySelectorAll('[data-step]').forEach(s=>s.classList.remove('is-active'));
+  document.querySelector(`[data-step="${n}"]`).classList.add('is-active');
+
+  // progress
+  if(n<=TOTAL_STEPS){
+    const pct = Math.round((n-1) / (TOTAL_STEPS-1) * 86 + 14);
+    document.getElementById('progFill').style.width = pct + '%';
+    document.querySelectorAll('.progress__step').forEach((el,i)=>{
+      el.classList.remove('is-current','is-done');
+      if(i+1 < n) el.classList.add('is-done');
+      else if(i+1 === n) el.classList.add('is-current');
+    });
+    document.querySelector('.progress').style.display = 'block';
+  } else {
+    document.querySelector('.progress').style.display = 'none';
+  }
+
+  // scroll to top of card
+  window.scrollTo({top:0,behavior:'smooth'});
+  state.step = n;
+}
+
+function next(){
+  syncState();
+  if(state.step < TOTAL_STEPS) showStep(state.step + 1);
+  else { renderConfirmation(); showStep(8); }
+}
+function prev(){ if(state.step > 1) showStep(state.step - 1); }
+
+function syncState(){
+  // step 1 — postcode
+  const pc = document.getElementById('bk-pc'); if(pc) state.postcode = pc.value;
+  // step 2 — date
+  const dateSel = document.querySelector('[data-step="2"] .opt.is-selected'); if(dateSel) state.date = dateSel.dataset.date;
+  // step 3 — size
+  const sizeSel = document.querySelector('[data-step="3"] .opt.is-selected');
+  if(sizeSel) state.size = { name: sizeSel.dataset.name, price: parseInt(sizeSel.dataset.price), code: parseInt(sizeSel.dataset.size) };
+  // step 4 — placement
+  const plSel = document.querySelector('[data-step="4"] .place.is-selected');
+  if(plSel) state.placement = { name: plSel.querySelector('.place__title').textContent.trim(), permit: parseInt(plSel.dataset.permit) };
+  // step 5 — access
+  document.querySelectorAll('[data-step="5"] .check').forEach(row=>{
+    const q = row.dataset.q;
+    const yes = row.querySelector('[data-ans="yes"]').classList.contains('is-yes');
+    state.access[q] = yes ? 'yes' : 'no';
+  });
+  // step 6 — details
+  ['name','phone','email','address'].forEach(k=>{
+    const map = {name:'bk-name', phone:'bk-phone', email:'bk-email', address:'bk-addr'};
+    const el = document.getElementById(map[k]);
+    if(el) state.details[k === 'address' ? 'address' : k] = el.value;
+  });
+  // step 7 — review render
+  renderReview();
+}
+
+function renderReview(){
+  document.getElementById('r-size').textContent = state.size.name;
+  document.getElementById('r-addr').textContent = state.details.address + ' &middot; ' + state.postcode;
+  document.getElementById('r-date').textContent = state.date;
+  document.getElementById('r-place').textContent = state.placement.name;
+  const total = state.size.price + state.placement.permit;
+  document.getElementById('r-total').textContent = '£' + total;
+  document.getElementById('r-payAmount').textContent = '£' + total;
+  document.getElementById('r-permitLine').style.display = state.placement.permit > 0 ? 'flex' : 'none';
+}
+
+function renderConfirmation(){
+  document.getElementById('c-name').textContent = state.details.name.split(' ')[0];
+  document.getElementById('c-size').textContent = state.size.name;
+  document.getElementById('c-date').textContent = state.date.toLowerCase();
+  document.getElementById('c-email').textContent = state.details.email;
+  const ref = 'HW-2026-' + String(Math.floor(10000 + Math.random()*89999));
+  document.getElementById('c-ref').textContent = ref;
+}
+
+// ============== URL PARAM PRE-FILL ==============
+// Homepage CTAs can pass ?size=6 or ?postcode=CR0+4AA — pre-fill on load.
+(function prefillFromURL(){
+  const p = new URLSearchParams(window.location.search);
+  const size = p.get('size');
+  const pc = p.get('postcode');
+  if(pc){ document.getElementById('bk-pc').value = pc; state.postcode = pc; }
+  if(size){
+    const card = document.querySelector(`[data-step="3"] .opt[data-size="${size}"]`);
+    if(card){
+      document.querySelectorAll('[data-step="3"] .opt').forEach(o=>o.classList.remove('is-selected'));
+      card.classList.add('is-selected');
+      state.size = { name: card.dataset.name, price: parseInt(card.dataset.price), code: parseInt(card.dataset.size) };
+    }
+  }
+})();
+
+// ============== INTERACTIONS ==============
+// Single-select option groups (steps 2, 3)
+document.querySelectorAll('[data-step="2"] .opt, [data-step="3"] .opt').forEach(opt=>{
+  opt.addEventListener('click', ()=>{
+    const sibs = opt.parentElement.querySelectorAll('.opt');
+    sibs.forEach(s=>s.classList.remove('is-selected'));
+    opt.classList.add('is-selected');
+  });
+});
+
+// Placement cards (step 4)
+document.querySelectorAll('[data-step="4"] .place').forEach(p=>{
+  p.addEventListener('click', ()=>{
+    document.querySelectorAll('[data-step="4"] .place').forEach(x=>x.classList.remove('is-selected'));
+    p.classList.add('is-selected');
+  });
+});
+
+// Yes/no checks (step 5)
+document.querySelectorAll('[data-step="5"] .check').forEach(row=>{
+  row.querySelectorAll('.check__btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      row.querySelectorAll('.check__btn').forEach(b=>{b.classList.remove('is-yes','is-no')});
+      btn.classList.add(btn.dataset.ans === 'yes' ? 'is-yes' : 'is-no');
+    });
+  });
+});
+</script>
+</body>
+</html>

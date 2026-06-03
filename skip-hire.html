@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Skip Hire in Croydon — Same-day delivery, transparent prices | Henry Woods</title>
+<meta name="description" content="Skip hire in Croydon, Sutton, Wimbledon and Mitcham. Family-run since 1996. 4–12 yard skips from £240 inc VAT. Same-day or next-day delivery. We handle the council permit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/main.css">
+<style>
+/* ====== SKIP-HIRE PAGE — page-scoped additions ====== */
+.page-hero{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-warm) 100%);padding:80px 0 64px;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:url('./assets/hero-bg.jpg') no-repeat center bottom/cover;opacity:0.6;pointer-events:none;mask-image:linear-gradient(180deg,transparent 0%,#000 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 100%)}
+.page-hero__inner{max-width:880px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.page-hero .breadcrumb{font-size:13px;color:var(--ink-muted);font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px;letter-spacing:.02em}
+.page-hero .breadcrumb a{color:var(--ink-muted);transition:color 160ms ease}
+.page-hero .breadcrumb a:hover{color:var(--hw-red)}
+.page-hero .breadcrumb .sep{color:var(--ink-faint)}
+.page-hero h1{font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-0.025em;color:var(--ink);margin:0 0 20px}
+.page-hero h1 .accent-red{color:var(--hw-red)}
+.page-hero .lead{font-size:20px;line-height:1.55;color:var(--ink-muted);max-width:60ch;margin:0 0 28px}
+.page-hero .trust-row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;font-size:14px;color:var(--ink);font-weight:600}
+.page-hero .trust-row span{display:inline-flex;align-items:center;gap:8px}
+.page-hero .trust-row svg{color:var(--hw-green);flex-shrink:0}
+.page-hero .trust-row em{font-style:normal;color:var(--hw-orange);font-weight:800}
+
+/* What's included strip */
+.included{padding:96px 0;background:var(--canvas)}
+.included__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+@media(max-width:880px){.included__grid{grid-template-columns:1fr}}
+.incl{display:flex;flex-direction:column;gap:14px;padding:32px;background:var(--paper);border-radius:var(--r-md);border:1px solid var(--hairline);transition:transform 240ms var(--ease-out),border-color 240ms ease}
+.incl:hover{transform:translateY(-3px);border-color:var(--hw-orange)}
+.incl__icon{width:56px;height:56px;border-radius:50%;background:var(--canvas);color:var(--hw-red);display:grid;place-items:center;border:2px solid var(--hairline)}
+.incl__icon svg{width:26px;height:26px}
+.incl h4{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:20px;color:var(--ink);margin:0;letter-spacing:-0.01em}
+.incl p{font-size:15px;line-height:1.55;color:var(--ink-muted);margin:0}
+
+/* Deeper permit + recycling explainers */
+.deep-section{padding:96px 0;background:var(--paper-warm)}
+.deep-section--canvas{background:var(--canvas)}
+.deep-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start}
+@media(max-width:960px){.deep-grid{grid-template-columns:1fr;gap:40px}}
+.deep__head h2{margin:14px 0 16px}
+.deep__head p{font-size:17px;line-height:1.55;color:var(--ink-muted);margin:0;max-width:42ch}
+.deep__body p{font-size:16px;line-height:1.65;color:var(--ink);margin:0 0 18px}
+.deep__body p strong{color:var(--hw-red);font-weight:700}
+.deep__body ul{margin:0 0 24px;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.deep__body li{padding-left:36px;position:relative;font-size:15px;line-height:1.55;color:var(--ink)}
+.deep__body li::before{content:"";position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:50%;background:var(--hw-orange);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");background-position:center;background-repeat:no-repeat}
+.deep__body li strong{color:var(--ink);font-weight:700}
+
+/* Recycling stats panel */
+.recy{display:grid;grid-template-columns:repeat(2,1fr);gap:0;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden}
+.recy__cell{padding:32px;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.recy__cell:nth-child(even){border-right:0}
+.recy__cell:nth-last-child(-n+2){border-bottom:0}
+@media(max-width:520px){.recy{grid-template-columns:1fr}.recy__cell{border-right:0!important;border-bottom:1px solid var(--hairline)!important}.recy__cell:last-child{border-bottom:0!important}}
+.recy__num{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:48px;line-height:1;color:var(--hw-red);letter-spacing:-0.03em}
+.recy__num sup{font-size:18px;color:var(--hw-orange);font-weight:700;vertical-align:super;margin-left:2px}
+.recy__lbl{display:block;margin-top:10px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);line-height:1.4}
+</style>
+</head>
+<body>
+
+<!-- UTILITY -->
+<div class="util">
+  <div class="container util__row">
+    <div class="util__left">
+      <span class="util__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:02033699540"><strong style="color:var(--ink)">0203 369 9540</strong></a></span>
+      <span class="util__item hide-mob"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> <a href="mailto:info@henrywoods.co.uk">info@henrywoods.co.uk</a></span>
+    </div>
+    <div class="util__right">
+      <span class="hide-mob">Mon&ndash;Fri 07:00&ndash;17:30 &nbsp;&middot;&nbsp; Sat 07:30&ndash;13:00</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="nav" id="nav">
+  <div class="container nav__row">
+    <a href="./mockup.html" class="brand" aria-label="Henry Woods Skip Hire home">
+      <img src="./assets/logo.png" alt="Henry Woods Skip Hire" width="260" height="73">
+    </a>
+    <div class="nav__menu">
+      <a href="./skip-hire.html" class="is-active">Skip hire</a>
+      <a href="./skip-hire.html#sizes">Skip sizes</a>
+      <a href="./areas/index.html">Areas we cover</a>
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+    </div>
+    <div class="nav__cta">
+      <a href="tel:02033699540" class="btn btn--phone">0203 369 9540</a>
+      <a href="./book.html" class="btn btn--primary btn--small">Book online</a>
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-controls="nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="./mockup.html">Home</a>
+      <span class="sep">/</span>
+      <span>Skip hire</span>
+    </nav>
+    <p class="eyebrow">Skip hire in Croydon &middot; family-run since 1996</p>
+    <h1 style="margin-top:18px">Skip hire in Croydon. <span class="accent-red">Booked in 60 seconds. On your drive tomorrow.</span></h1>
+    <p class="lead">Domestic, commercial and trade skip hire from the Mill Lane yard. Real prices, real lorries, real drivers. We sort the permit. We recycle 95% of what comes back.</p>
+    <div class="trust-row">
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> From <em>£240 inc VAT</em></span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Next-day delivery as standard</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Permit handled for you</span>
+      <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 4.8&#9733; from 142 Google reviews</span>
+    </div>
+    <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+      <a href="./book.html" class="btn btn--primary">Book your skip &rarr;</a>
+      <a href="tel:02033699540" class="btn btn--ghost">Or call 0203 369 9540</a>
+    </div>
+  </div>
+</header>
+
+<!-- BOOKING STRIP -->
+<section class="book-strip">
+  <div class="book-strip__inner">
+    <div class="book-strip__title">
+      <strong>Book your skip</strong>
+      <span>60 seconds, instant price</span>
+    </div>
+    <div class="book-strip__field">
+      <label for="pc">Postcode</label>
+      <input id="pc" class="book-strip__input mono" type="text" value="CR0 4AA" autocomplete="postal-code">
+    </div>
+    <div class="book-strip__field">
+      <label for="dt">Drop-off</label>
+      <input id="dt" class="book-strip__input mono" type="text" value="Tomorrow">
+    </div>
+    <div class="book-strip__field">
+      <label for="sz">Skip size</label>
+      <select id="sz" class="book-strip__input" onchange="updateTotal()">
+        <option value="240">4 yard</option>
+        <option value="288" selected>6 yard</option>
+        <option value="318">8 yard</option>
+        <option value="396">12 yard</option>
+      </select>
+    </div>
+    <div class="book-strip__total">
+      <span>Total inc VAT</span>
+      <strong id="total">£288</strong>
+    </div>
+    <a href="./book.html" class="btn btn--primary book-strip__cta" onclick="this.href=carryToBook()">Reserve &amp; pay &rarr;</a>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="container">
+    <header class="section__head" style="text-align:center;margin-left:auto;margin-right:auto;max-width:680px">
+      <p class="eyebrow">What's in the price</p>
+      <h2>One number. No surprises on the day.</h2>
+      <p>Every Henry Woods skip booking includes delivery, collection, a 14-day hire window, a full waste transfer note and our recycling promise. The permit is added at council cost if you're putting the skip on the road.</p>
+    </header>
+    <div class="included__grid">
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4>14 days' hire as standard</h4>
+        <p>Skip stays on your drive for two weeks. Need it longer? Extension is £15 per day. Done early? Phone the yard and we'll bring forward the collection at no extra cost.</p>
+      </article>
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h4>Permit handled for you</h4>
+        <p>If the skip's going on the road, we apply for the council permit on your behalf. Croydon, Sutton, Merton and Lambeth covered. Cost added before you pay — no surprises.</p>
+      </article>
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.4 0 4.6.9 6.3 2.4"/><polyline points="21 3 21 9 15 9"/></svg></div>
+        <h4>Waste transfer note</h4>
+        <p>Legally required documentation issued with every collection — proves your waste was disposed of properly. Especially important for builders and trade customers.</p>
+      </article>
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></div>
+        <h4>Card payment included</h4>
+        <p>Visa, Mastercard, Apple Pay or Google Pay via Stripe. No surcharges, no phone-and-card-number dance. Receipt straight to your inbox.</p>
+      </article>
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88z"/></svg></div>
+        <h4>95% recycled</h4>
+        <p>Every skip back to the yard is hand-sorted. Wood, metal, plastics and aggregates separated and rerouted. Less than 5% lands in landfill.</p>
+      </article>
+      <article class="incl">
+        <div class="incl__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg></div>
+        <h4>Driver texts your window</h4>
+        <p>On the morning of drop-off you get a 30-minute delivery window by text — no waiting in all day. Same again for collection.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SKIP SIZES — same grid as homepage -->
+<section class="section section--paper" id="sizes">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">Skip sizes &amp; prices</p>
+      <h2>Real prices. Right here. No quote forms.</h2>
+      <p>Every price includes delivery, collection, 14 days' hire and a full waste transfer note. Permit added at cost where the council needs one for road placement.</p>
+    </header>
+
+    <div class="sizes__grid">
+      <article class="size">
+        <h3 class="size__name">4 yard</h3>
+        <div class="size__dims">
+          <span>1.83 &middot; 1.28 &middot; 1.07 m</span>
+          <span>30&ndash;40 bin bags</span>
+        </div>
+        <p class="size__use">Bathroom rip-out, garage clear, garden tidy. Fits on most driveways.</p>
+        <div class="size__price"><strong>£240</strong><span>inc VAT</span></div>
+        <a href="./book.html?size=4" class="btn btn--ghost btn--small">Book a 4 yard</a>
+      </article>
+      <article class="size">
+        <h3 class="size__name">6 yard</h3>
+        <div class="size__dims">
+          <span>2.59 &middot; 1.52 &middot; 1.22 m</span>
+          <span>50&ndash;60 bin bags</span>
+        </div>
+        <p class="size__use">Kitchen rip-out, modest renovation, soil &amp; rubble (heavy waste suitable).</p>
+        <div class="size__price"><strong>£288</strong><span>inc VAT</span></div>
+        <a href="./book.html?size=6" class="btn btn--ghost btn--small">Book a 6 yard</a>
+      </article>
+      <article class="size">
+        <h3 class="size__name">8 yard</h3>
+        <div class="size__dims">
+          <span>3.66 &middot; 1.68 &middot; 1.22 m</span>
+          <span>70&ndash;80 bin bags</span>
+        </div>
+        <p class="size__use">Two- and three-bed renovations, larger garden jobs, builders' favourite.</p>
+        <div class="size__price"><strong>£318</strong><span>inc VAT</span></div>
+        <a href="./book.html?size=8" class="btn btn--ghost btn--small">Book an 8 yard</a>
+      </article>
+      <article class="size">
+        <h3 class="size__name">12 yard</h3>
+        <div class="size__dims">
+          <span>3.66 &middot; 1.68 &middot; 1.83 m</span>
+          <span>100&ndash;120 bin bags</span>
+        </div>
+        <p class="size__use">Full property clearance, large refurbs, light bulky waste only (no heavy soil).</p>
+        <div class="size__price"><strong>£396</strong><span>inc VAT</span></div>
+        <a href="./book.html?size=12" class="btn btn--ghost btn--small">Book a 12 yard</a>
+      </article>
+    </div>
+
+    <p class="sizes__foot"><span class="dot"></span><strong>Order before 14:00</strong> for next-day drop-off &nbsp;&nbsp; <span class="dot"></span><strong>Same-day delivery</strong> available, ring the yard &nbsp;&nbsp; <span class="dot"></span>Wait-and-load &amp; roll-on/roll-off on request</p>
+  </div>
+</section>
+
+<!-- PERMIT DEEP SECTION -->
+<section class="deep-section">
+  <div class="container">
+    <div class="deep-grid">
+      <div class="deep__head">
+        <p class="eyebrow">Council permits</p>
+        <h2>If it's going on the road, we sort the permit.</h2>
+        <p>Forgetting the permit is the #1 way skip hire goes wrong. We handle it on your behalf for every south London council we cover.</p>
+      </div>
+      <div class="deep__body">
+        <p><strong>When do you need a permit?</strong> Any skip placed on a public road, pavement or grass verge needs a council-issued permit. Skips on private driveways do not.</p>
+        <ul>
+          <li><strong>We apply on your behalf</strong> for every booking that needs one — you don't need to phone the council yourself.</li>
+          <li><strong>Cost included before you pay.</strong> The permit fee is added to your booking total before you reach the payment screen.</li>
+          <li><strong>Lead time:</strong> most councils issue within 3 working days. Order early in the week if you want the skip down by Friday.</li>
+          <li><strong>Reflective markings + lighting</strong> are added by our driver as part of the drop-off — required under the Highways Act 1980.</li>
+          <li><strong>Bay suspensions</strong> (when the parking bay your skip needs is in use) are also handled by us, charged at council rates.</li>
+        </ul>
+        <p>Councils we apply for permits with: <strong>Croydon</strong>, <strong>Sutton</strong>, <strong>Merton</strong>, <strong>Lambeth</strong>, <strong>Wandsworth</strong>. Phone the yard if you're at the edge of these areas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECYCLING DEEP SECTION -->
+<section class="deep-section deep-section--canvas">
+  <div class="container">
+    <div class="deep-grid">
+      <div class="deep__head">
+        <p class="eyebrow">Recycling commitment</p>
+        <h2>95% out of landfill. Every skip. Every week.</h2>
+        <p>We operate to Environment Agency licence CBDU172893. Every load returns to the Mill Lane yard, gets hand-sorted, and is rerouted to the right recycling stream.</p>
+      </div>
+      <div class="deep__body">
+        <div class="recy">
+          <div class="recy__cell">
+            <div class="recy__num">95<sup>%</sup></div>
+            <span class="recy__lbl">Of waste collected is recycled or reused</span>
+          </div>
+          <div class="recy__cell">
+            <div class="recy__num">12<sup>kt</sup></div>
+            <span class="recy__lbl">Tonnes of waste diverted from landfill in 2025</span>
+          </div>
+          <div class="recy__cell">
+            <div class="recy__num">100<sup>%</sup></div>
+            <span class="recy__lbl">Hand-sorted at the yard before disposal</span>
+          </div>
+          <div class="recy__cell">
+            <div class="recy__num">EA</div>
+            <span class="recy__lbl">Environment Agency licensed waste carrier CBDU172893</span>
+          </div>
+        </div>
+        <p style="margin-top:24px">Streams we handle on-site: <strong>wood</strong>, <strong>metals</strong>, <strong>aggregates &amp; rubble</strong>, <strong>plasterboard</strong>, <strong>cardboard</strong>, <strong>general construction waste</strong>. Hazardous waste (asbestos, paint, batteries, fluorescent tubes) is not accepted in our skips — we'll point you to a specialist.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section--red" id="how">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">How it works</p>
+      <h2>Booked in <em style="color:var(--hw-orange);font-style:italic">sixty seconds.</em> On your drive tomorrow.</h2>
+      <p>Three steps, no phone tag. If the council needs a road permit, we handle that too.</p>
+    </header>
+
+    <div class="steps">
+      <article class="step">
+        <p class="step__num">01 &nbsp;/&nbsp; CHOOSE</p>
+        <h4>Pick your skip &amp; date</h4>
+        <p>Punch in your postcode, choose a date and size. Live prices, no quote forms, no &ldquo;ring back&rdquo;.</p>
+      </article>
+      <article class="step">
+        <p class="step__num">02 &nbsp;/&nbsp; PAY</p>
+        <h4>Pay securely with Stripe</h4>
+        <p>Card or Apple/Google Pay. Card surcharge: zero. Receipt straight to your inbox.</p>
+      </article>
+      <article class="step">
+        <p class="step__num">03 &nbsp;/&nbsp; DROP-OFF</p>
+        <h4>Skip on your drive</h4>
+        <p>Driver texts you a 30-minute window. 14 days to fill it. We collect, sort and recycle 95% of what's in it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ — extended set -->
+<section class="section section--paper">
+  <div class="container">
+    <header class="section__head" style="text-align:center;margin-left:auto;margin-right:auto">
+      <p class="eyebrow">Frequently asked</p>
+      <h2>Skip hire questions, answered.</h2>
+    </header>
+
+    <div class="faq">
+      <div class="faq__item is-open">
+        <button class="faq__q">Do I need a permit to put a skip on the road?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>If your skip is going on a public road or pavement, yes &mdash; the local council issues a permit. We apply for it on your behalf when you book, and include the cost in your total before you pay. On a private drive, no permit is needed.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">What can't I put in the skip?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>Fridges &amp; freezers, TVs &amp; monitors, tyres, asbestos, batteries, paint and chemicals, anything containing fuel. Everything else &mdash; including plasterboard, soil and rubble &mdash; goes in (just tell us in advance for the heavy ones so we bring the right lorry).</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">How long can I keep the skip?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>Standard hire is 14 days. Need longer? Extension is £15 per day. Need it gone sooner? Phone the yard the day before and we'll bring forward the collection at no extra cost.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">Can I get same-day delivery?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>Often yes, depending on lorry availability. Best to ring the yard on 0203 369 9540 before 11am. Online bookings before 14:00 are confirmed for next-day delivery.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">What if the skip won't fit through my access?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>If you're unsure, send us a photo via WhatsApp on 0203 369 9540 before booking. We'd rather check than turn up with the wrong lorry. Tight access? A 4-yard usually clears most domestic driveways.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">Will the skip damage my driveway?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>On concrete, tarmac and block paving, no — we use timber bearers under the feet to spread the weight. On gravel or grass, the marks will be visible while the skip's there. Mention surface in the booking and our driver will plan accordingly.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">Do you do trade accounts?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>Yes &mdash; builders, developers and trade customers can open an account with monthly billing, multi-skip discounts and priority booking. Phone the yard or email info@henrywoods.co.uk to set up.</div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q">What happens to my waste?<span class="faq__plus" aria-hidden="true"></span></button>
+        <div class="faq__a"><div>Every load comes back to the Mill Lane yard and is hand-sorted. Wood, metals, aggregates and plasterboard are separated into recycling streams. We recycle 95% &mdash; only the unsortable residue ends up in landfill.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="container cta-strip__row">
+    <h3>Ready when you are. The yard&rsquo;s open.</h3>
+    <div class="cta-strip__actions">
+      <a href="./book.html" class="btn btn--primary">Book your skip</a>
+      <a href="tel:02033699540" class="btn btn--ghost">Call 0203 369 9540</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="./assets/logo.png" alt="Henry Woods Skip Hire" width="220" height="62">
+        <p>Henry Woods Waste Management Ltd. Family-run skip hire from Mill Lane, Croydon, since 1996. Environment Agency licensed waste carrier. We recycle 95% of what we collect.</p>
+        <div class="accreds">
+          <span>EA · CBDU172893</span>
+          <span>ICO · ZA298415</span>
+          <span>SafeContractor</span>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h5>Contact the yard</h5>
+        <ul>
+          <li class="mono">0203 369 9540</li>
+          <li><a href="mailto:info@henrywoods.co.uk">info@henrywoods.co.uk</a></li>
+          <li>Unit 9, Mill Lane Trading Estate, Mill Lane, Croydon CR0 4AA</li>
+          <li>Mon&ndash;Fri 07:00&ndash;17:30</li>
+          <li>Sat 07:30&ndash;13:00</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Skips</h5>
+        <ul>
+          <li><a href="#sizes">4 yard skips</a></li>
+          <li><a href="#sizes">6 yard skips</a></li>
+          <li><a href="#sizes">8 yard skips</a></li>
+          <li><a href="#sizes">12 yard skips</a></li>
+          <li><a href="./mockup.html#contact">Wait &amp; load</a></li>
+          <li><a href="./mockup.html#contact">Roll-on / roll-off</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Areas</h5>
+        <ul>
+          <li><a href="./mockup.html#coverage">Croydon (CR0&ndash;CR9)</a></li>
+          <li><a href="./mockup.html#coverage">Sutton (SM1&ndash;SM6)</a></li>
+          <li><a href="./mockup.html#coverage">Mitcham &amp; Wimbledon</a></li>
+          <li><a href="./mockup.html#coverage">Caterham &amp; Coulsdon</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>&copy; 2026 Henry Woods Waste Management Ltd. &nbsp;&middot;&nbsp; Company No. 03244917 &nbsp;&middot;&nbsp; VAT GB 654 8721 03</span>
+      <span>Designed by Nu Media Group</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function carryToBook(){
+  const pc = document.getElementById('pc').value.trim();
+  const sz = document.getElementById('sz').value;
+  const sizeMap = {'240':'4','288':'6','318':'8','396':'12'};
+  const sizeCode = sizeMap[sz] || '6';
+  const params = new URLSearchParams();
+  if(pc) params.set('postcode', pc);
+  params.set('size', sizeCode);
+  return './book.html?' + params.toString();
+}
+function updateTotal(){
+  document.getElementById('total').textContent='£'+document.getElementById('sz').value;
+}
+document.querySelectorAll('.faq__q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('is-open')));
+const nav=document.getElementById('nav'),burger=document.getElementById('burger');
+burger.addEventListener('click',()=>{
+  const open=nav.classList.toggle('is-open');
+  burger.setAttribute('aria-expanded',open);
+  burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+});
+nav.querySelectorAll('.nav__menu a').forEach(a=>a.addEventListener('click',()=>{
+  nav.classList.remove('is-open');
+  burger.setAttribute('aria-expanded','false');
+}));
+</script>
+</body>
+</html>

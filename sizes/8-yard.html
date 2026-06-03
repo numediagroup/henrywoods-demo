@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>8 yard Skip Hire in Croydon — from £318 inc VAT | Henry Woods</title>
+<meta name="description" content="8 yard skip hire in Croydon, Sutton and Wimbledon. From £318 inc VAT. Holds 70&ndash;80 bin bags. Same-day or next-day delivery. Family-run since 1996.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.size-hero{padding:80px 0 56px;background:linear-gradient(180deg,var(--paper) 0%,var(--paper-warm) 100%)}
+.size-hero__inner{max-width:1100px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center}
+@media(max-width:880px){.size-hero__inner{grid-template-columns:1fr;gap:32px}}
+.size-hero .breadcrumb{font-size:13px;color:var(--ink-muted);font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.size-hero .breadcrumb a{color:var(--ink-muted)}.size-hero .breadcrumb a:hover{color:var(--hw-red)}
+.size-hero .breadcrumb .sep{color:var(--ink-faint)}
+.size-hero h1{font-size:clamp(36px,5vw,58px);line-height:1.05;letter-spacing:-0.025em;color:var(--ink);margin:0 0 18px}
+.size-hero h1 em{font-style:normal;color:var(--hw-red);font-weight:800}
+.size-hero .lead{font-size:18px;line-height:1.55;color:var(--ink-muted);margin:0 0 28px;max-width:46ch}
+.size-hero .price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:24px}
+.size-hero .price-big{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:52px;line-height:1;color:var(--hw-red);letter-spacing:-0.03em}
+.size-hero .price-meta{font-size:14px;color:var(--ink-muted);font-weight:600}
+.size-hero .price-meta strong{color:var(--ink);font-weight:700}
+
+.size-card{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);padding:32px;text-align:center;box-shadow:var(--shadow-card)}
+.size-card__visual{display:inline-block;padding:24px;background:var(--paper-warm);border-radius:var(--r-sm);margin-bottom:18px}
+.size-card__visual svg{display:block;width:200px;height:auto}
+.size-card__title{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:32px;color:var(--ink);margin:0 0 8px;letter-spacing:-0.02em}
+.size-card__dims{font-size:13px;color:var(--ink-muted);font-weight:500;margin:0}
+
+.specs{padding:80px 0;background:var(--canvas)}
+.specs__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--hairline);margin-top:24px}
+@media(max-width:760px){.specs__grid{grid-template-columns:1fr 1fr}}
+.specs__cell{padding:28px;border-right:1px solid var(--hairline)}
+.specs__cell:last-child{border-right:0}
+@media(max-width:760px){.specs__cell:nth-child(even){border-right:0}.specs__cell{border-bottom:1px solid var(--hairline)}}
+.specs__lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 10px}
+.specs__val{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.1}
+.specs__val em{font-style:normal;font-weight:600;color:var(--ink-muted);font-size:14px;margin-left:4px}
+
+.fits{padding:80px 0;background:var(--paper)}
+.fits__grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+@media(max-width:880px){.fits__grid{grid-template-columns:1fr;gap:32px}}
+.fits__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+.fits__list li{display:flex;align-items:flex-start;gap:14px;font-size:16px;line-height:1.5;color:var(--ink)}
+.fits__list li svg{flex-shrink:0;margin-top:2px;color:var(--hw-green)}
+.fits__list li strong{color:var(--hw-red);font-weight:700}
+
+.compare{padding:80px 0;background:var(--canvas)}
+.compare__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
+@media(max-width:760px){.compare__grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.compare__grid{grid-template-columns:1fr}}
+.cmp{padding:24px;background:var(--paper);border:2px solid var(--hairline);border-radius:var(--r-sm);text-align:center;transition:all 200ms var(--ease-out)}
+.cmp.is-current{border-color:var(--hw-red);background:#FFF8F4}
+.cmp__name{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.02em;color:var(--ink);margin:0}
+.cmp__price{font-family:"Panton","Sora",sans-serif;font-weight:800;font-size:20px;color:var(--hw-red);margin:8px 0 4px}
+.cmp__meta{font-size:12px;color:var(--ink-muted);font-weight:500}
+.cmp__cta{margin-top:14px}
+.cmp.is-current::before{content:"You're here";display:block;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--hw-red);margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="util">
+  <div class="container util__row">
+    <div class="util__left">
+      <span class="util__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:02033699540"><strong style="color:var(--ink)">0203 369 9540</strong></a></span>
+    </div>
+    <div class="util__right">
+      <span class="hide-mob">Mon&ndash;Fri 07:00&ndash;17:30 &nbsp;&middot;&nbsp; Sat 07:30&ndash;13:00</span>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="nav">
+  <div class="container nav__row">
+    <a href="../mockup.html" class="brand" aria-label="Henry Woods Skip Hire home"><img src="../assets/logo.png" alt="Henry Woods Skip Hire" width="260" height="73"></a>
+    <div class="nav__menu">
+      <a href="../skip-hire.html">Skip hire</a>
+      <a href="../skip-hire.html#sizes" class="is-active">Skip sizes</a>
+      <a href="../areas/index.html">Areas we cover</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="nav__cta">
+      <a href="tel:02033699540" class="btn btn--phone">0203 369 9540</a>
+      <a href="../book.html?size=8" class="btn btn--primary btn--small">Book online</a>
+      <button class="nav__burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="size-hero">
+  <div class="size-hero__inner">
+    <div>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../mockup.html">Home</a><span class="sep">/</span>
+        <a href="../skip-hire.html">Skip hire</a><span class="sep">/</span>
+        <span>8 yard skip</span>
+      </nav>
+      <p class="eyebrow">Trade favourite &middot; 8 yard skips</p>
+      <h1 style="margin-top:18px">8 yard skip hire <em>in Croydon</em>.</h1>
+      <p class="lead">The everyday workhorse — the one most builders book by default. Suitable for heavy waste, and the most-booked size at the Mill Lane yard.</p>
+      <div class="price-row">
+        <span class="price-big">£318</span>
+        <span class="price-meta">inc VAT &middot; <strong>14 days' hire</strong> &middot; permit help if needed</span>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a href="../book.html?size=8" class="btn btn--primary">Book a 8 yard skip</a>
+        <a href="tel:02033699540" class="btn btn--ghost">Or call the yard</a>
+      </div>
+    </div>
+    <div class="size-card">
+      <div class="size-card__visual"><svg viewBox="0 0 320 190.0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="160" cy="184.0" rx="130" ry="4" fill="#2C2C2C" opacity="0.16"/>
+  <polygon points="20,30 300,30 275,170.0 45,170.0" fill="#F77C39" stroke="#9F1E00" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="20,30 45,170.0 50,170.0 25,30" fill="#C44A1F"/>
+  <path d="M 20 30 L 300 30 L 295 42 L 25 42 Z" fill="#FA8B4A" opacity="0.55"/>
+  <line x1="100" y1="35" x2="103" y2="165.0" stroke="#9F1E00" stroke-width="2" opacity="0.5"/>
+  <line x1="160" y1="35" x2="160" y2="165.0" stroke="#9F1E00" stroke-width="2" opacity="0.5"/>
+  <line x1="220" y1="35" x2="217" y2="165.0" stroke="#9F1E00" stroke-width="2" opacity="0.5"/>
+  <rect x="130" y="65" width="60" height="28" fill="#FFFFFF" stroke="#9F1E00" stroke-width="2" rx="2"/>
+  <text x="160" y="78" text-anchor="middle" font-family="'Sora',sans-serif" font-size="8" font-weight="800" fill="#2C2C2C">HENRY WOODS</text>
+  <text x="160" y="88" text-anchor="middle" font-family="'Sora',sans-serif" font-size="5" font-weight="700" fill="#9F1E00" letter-spacing="1">SKIP HIRE</text>
+</svg></div>
+      <h3 class="size-card__title">8 yard</h3>
+      <p class="size-card__dims">3.66 &middot; 1.68 &middot; 1.22&thinsp;m &middot; 70&ndash;80 bin bags</p>
+    </div>
+  </div>
+</header>
+
+<section class="specs">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">At a glance</p>
+      <h2>The 8 yard skip in numbers.</h2>
+    </header>
+    <div class="specs__grid">
+      <div class="specs__cell">
+        <p class="specs__lbl">Capacity</p>
+        <div class="specs__val">70&ndash;80<em>bin bags</em></div>
+      </div>
+      <div class="specs__cell">
+        <p class="specs__lbl">Dimensions</p>
+        <div class="specs__val" style="font-size:18px">3.66 &middot; 1.68 &middot; 1.22&thinsp;m</div>
+      </div>
+      <div class="specs__cell">
+        <p class="specs__lbl">Heavy waste</p>
+        <div class="specs__val">Yes</div>
+      </div>
+      <div class="specs__cell">
+        <p class="specs__lbl">Access width needed</p>
+        <div class="specs__val">2.6&thinsp;m<em>min</em></div>
+      </div>
+      <div class="specs__cell">
+        <p class="specs__lbl">Hire period</p>
+        <div class="specs__val">14<em>days standard</em></div>
+      </div>
+      <div class="specs__cell">
+        <p class="specs__lbl">Permit (if on road)</p>
+        <div class="specs__val">£55<em>added at cost</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fits">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">What fits in a 8 yard skip</p>
+      <h2>The builder's default. Mid-size renovations and bigger garden jobs.</h2>
+    </header>
+    <div class="fits__grid">
+      <div>
+        <p style="font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 14px">Best for</p>
+        <ul class="fits__list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <strong>Two- and three-bed renovations</strong> — strip-out and refit</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <strong>Larger garden clearances</strong> — patios, decking, hedge removal</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <strong>Mid-size commercial</strong> — shop fit-outs, office refurbs</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <strong>Trade accounts</strong> — most builders' default size</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 14px">Allowed in the skip</p>
+        <ul class="fits__list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wood, metal, plastic, cardboard</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Heavy waste fine (soil, rubble, concrete) up to the fill line</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Plasterboard (tell us first so we bag it separately)</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Most general construction and household waste</li>
+        </ul>
+        <p style="font-size:13px;color:var(--ink-faint);margin:18px 0 0">Not allowed: fridges &amp; freezers, TVs, tyres, asbestos, batteries, paint, chemicals, anything with fuel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">Compare sizes</p>
+      <h2>Not sure? Here's how the four sizes stack up.</h2>
+    </header>
+    <div class="compare__grid">
+      <div class="cmp ">
+        <h4 class="cmp__name">4 yd</h4>
+        <div class="cmp__price">£240</div>
+        <p class="cmp__meta">30&ndash;40 bags</p>
+        <a href="./4-yard.html" class="btn btn--ghost btn--small cmp__cta">View</a>
+      </div>
+      <div class="cmp ">
+        <h4 class="cmp__name">6 yd</h4>
+        <div class="cmp__price">£288</div>
+        <p class="cmp__meta">50&ndash;60 bags</p>
+        <a href="./6-yard.html" class="btn btn--ghost btn--small cmp__cta">View</a>
+      </div>
+      <div class="cmp is-current">
+        <h4 class="cmp__name">8 yd</h4>
+        <div class="cmp__price">£318</div>
+        <p class="cmp__meta">70&ndash;80 bags</p>
+        <a href="./8-yard.html" class="btn btn--ghost btn--small cmp__cta">View</a>
+      </div>
+      <div class="cmp ">
+        <h4 class="cmp__name">12 yd</h4>
+        <div class="cmp__price">£396</div>
+        <p class="cmp__meta">100&ndash;120 bags</p>
+        <a href="./12-yard.html" class="btn btn--ghost btn--small cmp__cta">View</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="container cta-strip__row">
+    <h3>Ready for your 8 yard skip?</h3>
+    <div class="cta-strip__actions">
+      <a href="../book.html?size=8" class="btn btn--primary">Book a 8 yard skip</a>
+      <a href="tel:02033699540" class="btn btn--ghost">Call 0203 369 9540</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="../assets/logo.png" alt="Henry Woods Skip Hire" width="220" height="62">
+        <p>Henry Woods Waste Management Ltd. Family-run skip hire from Mill Lane, Croydon, since 1996. Environment Agency licensed waste carrier. We recycle 95% of what we collect.</p>
+        <div class="accreds"><span>EA · CBDU172893</span><span>ICO · ZA298415</span><span>SafeContractor</span></div>
+      </div>
+      <div class="footer__col">
+        <h5>Contact the yard</h5>
+        <ul>
+          <li class="mono">0203 369 9540</li>
+          <li><a href="mailto:info@henrywoods.co.uk">info@henrywoods.co.uk</a></li>
+          <li>Unit 9, Mill Lane Trading Estate, Mill Lane, Croydon CR0 4AA</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Sizes</h5>
+        <ul>
+          <li><a href="./4-yard.html">4 yard skip</a></li>
+          <li><a href="./6-yard.html">6 yard skip</a></li>
+          <li><a href="./8-yard.html">8 yard skip</a></li>
+          <li><a href="./12-yard.html">12 yard skip</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Areas</h5>
+        <ul>
+          <li><a href="../mockup.html#coverage">Croydon</a></li>
+          <li><a href="../mockup.html#coverage">Sutton</a></li>
+          <li><a href="../mockup.html#coverage">Wimbledon</a></li>
+          <li><a href="../mockup.html#coverage">Mitcham</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>&copy; 2026 Henry Woods Waste Management Ltd. &nbsp;&middot;&nbsp; Company No. 03244917</span>
+      <span>Designed by Nu Media Group</span>
+    </div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav'),burger=document.getElementById('burger');
+burger.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');burger.setAttribute('aria-expanded',open);});
+nav.querySelectorAll('.nav__menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('is-open')));
+</script>
+</body>
+</html>

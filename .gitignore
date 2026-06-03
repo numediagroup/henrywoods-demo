@@ -1,0 +1,18 @@
+# Screenshots from local Playwright sessions
+v2-*.jpg
+v3-*.jpg
+mockup-*.png
+*-section.jpg
+*-hero.jpg
+*-full.jpg
+live-site-current-hero.jpg
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Local server PID
+*.pid
